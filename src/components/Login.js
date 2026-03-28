@@ -1,6 +1,5 @@
 import Header from "./Header";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { checkValidData } from "../utils/validate";
 import {
@@ -10,13 +9,13 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR } from "../utils/constants";
 
 
 const Login = () => {
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSignInForm, setIsSignInForm] = useState(true);
-  const navigate = useNavigate();
   // we create references which i want to refer to email and password input box
   const name = useRef(null);
   const email = useRef(null);
@@ -68,7 +67,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current?.value,
-            photoURL: "https://avatars.githubusercontent.com/u/149107722?v=4",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               // Profile updated!

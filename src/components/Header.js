@@ -6,6 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO } from "../utils/constants";
 
 
 
@@ -16,8 +17,7 @@ const Header = ({ logoSize = "w-40" }) => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        navigate("/");
+        // Sign-out successful. 
       })
       .catch((error) => {
         // An error happened.
@@ -26,7 +26,7 @@ const Header = ({ logoSize = "w-40" }) => {
   };
 
     useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in
         const {uid, email, displayName, photoURL} = user;
@@ -39,6 +39,8 @@ const Header = ({ logoSize = "w-40" }) => {
         navigate("/");
       }
     });
+    // unsubscrube when component unmounts
+    return () => unsubscribe();
   }, []);
 
 
@@ -46,7 +48,7 @@ const Header = ({ logoSize = "w-40" }) => {
     <div className="absolute w-screen px-8 py-5 bg-gradient-to-b from-black z-10 flex items-center justify-between">
       <img
         className={logoSize}
-        src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+        src={LOGO}
         alt="logo"
       />
       {user && (
