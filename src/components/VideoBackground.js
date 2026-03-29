@@ -1,10 +1,9 @@
-
 import { useSelector } from "react-redux";
 import useTrailerVideo from "../hooks/useTrailerVideo";
 
 const VideoBackground = ({ movieID }) => {
-    const trailerVideo = useSelector(store => store.movies?.trailerVideo);
-    useTrailerVideo(movieID);
+  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
+  useTrailerVideo(movieID);
 
   if (!trailerVideo?.key) {
     return <div className="w-screen aspect-video bg-black" />;
@@ -14,7 +13,7 @@ const VideoBackground = ({ movieID }) => {
     "https://www.youtube.com/embed/" +
     "?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=" +
     trailerVideo.key;
-    
+
   return (
     <div className="w-screen">
       <iframe

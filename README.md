@@ -29,8 +29,15 @@
 - Fetch Data for trailer video
 - Update Store with trailer video data
 - Embedded the Youtube Video and make it autoplay and mute
-
-
+- Build Secondary Container
+- Build Movie List
+- Build Movie Card
+- TMDB Image CDN URL
+- Custom hooks 
+- GPT Search Page
+- GPT Search Bar
+- Multi-language support for GPT Search
+- Integrate GPT API for movie suggestions based on search query
 
 # Features
 - Login and Sign Up Forms
